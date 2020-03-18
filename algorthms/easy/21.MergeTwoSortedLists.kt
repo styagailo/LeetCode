@@ -1,28 +1,68 @@
-fun main(args: Array<String>) {
-
-    val array = IntArray(5, { integer -> integer + 2})
-
-    println(removeDuplicates(array))
-    array.forEach { print(it) }
-}
-
-fun removeDuplicates(nums: IntArray): Int {
-        if (nums.size == 1) return 1
-        var acc = 0
-        for (i in 1 until nums.size) {
-            when {
-                nums[i] == nums[i - 1] -> {
-                    acc++
-                }
-                nums[i] != nums[i - 1] && acc != 0 -> {
-                    nums[i - acc] = nums[i]
-                }
-            }
+fun mergeTwoListsRecursively(l1: ListNode?, l2: ListNode?): ListNode? {
+        when {
+            l1 == null && l2 == null -> return null
+            l1 == null -> return l2
+            l2 == null -> return l1
         }
         
-        var result = 1
-        while (result < nums.size && nums[result - 1] < nums[result]) {
-            result++
+        if (l1 == null) throw RuntimeException()
+        if (l2 == null) throw RuntimeException()
+        
+        return when {
+            l1.`val` > l2.`val` -> {
+                ListNode(l2.`val`).apply { next = mergeTwoLists(l1, l2.next) }
+            }
+            else -> {
+                ListNode(l1.`val`).apply { next = mergeTwoLists(l1.next, l2) }
+            }
         }
-        return result
+    }
+
+fun mergeTwoLists(left: ListNode?, right: ListNode?): ListNode? {
+    if (left == null && right == null) return null
+
+    var l1 = left
+    var l2 = right
+    var headNode = ListNode(0)
+    var resultNode = headNode
+
+    while(l1 != null && l2 != null) {
+        when {
+            l1.`val` > l2.`val` -> {
+                headNode.`val` = l2.`val`
+                l2 = l2.next
+            }
+            else -> {
+                headNode.`val` = l1.`val`
+                l1 = l1.next
+            }
+        }
+        if (l1 != null || l2 != null) {
+            headNode.next = ListNode(0)
+            headNode = headNode.next
+        }
+    }
+
+    while (l1 != null) {
+        headNode.`val` = l1.`val`
+        l1 = l1.next
+
+        if (l1 != null) {
+            headNode.next = ListNode(0)
+            headNode = headNode.next
+        }
+    }
+
+    while (l2 != null) {
+        headNode.`val` = l2.`val`
+        l2 = l2.next
+
+        if (l2 != null) {
+            headNode.next = ListNode(0)
+            headNode = headNode.next
+        }
+    }
+
+    return resultNode
 }
+
