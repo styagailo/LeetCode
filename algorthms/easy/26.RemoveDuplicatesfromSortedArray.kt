@@ -1,11 +1,3 @@
-fun main(args: Array<String>) {
-
-    val array = IntArray(5, { integer -> integer + 2})
-
-    println(removeDuplicates(array))
-    array.forEach { print(it) }
-}
-
 fun removeDuplicates(nums: IntArray): Int {
         if (nums.size == 1) return 1
         var acc = 0
