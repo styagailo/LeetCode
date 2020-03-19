@@ -22,8 +22,8 @@ fun removeElement(nums: IntArray, `val`: Int): Int {
 
 fun removeElementImproved(nums: IntArray, `val`: Int): Int {
     var i = 0
-    for (j in 1 until nums.size) {
-        if (nums[j] != val) {
+    for (j in 0 until nums.size) {
+        if (nums[j] != `val`) {
             i++
             nums[i] = nums[j]
         }
