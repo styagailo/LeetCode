@@ -20,10 +20,13 @@ fun removeElement(nums: IntArray, `val`: Int): Int {
     return sizeOfArrayWithoutVal
 }
 
-/*
-Examples
-[0, 1, 1] value 1
-[1, 1, 1] value 1
-[2, 2, 2] value 2
-[0, 1, 2, 3, 3, 3, 2] value 3
- */
+fun removeElementImproved(nums: IntArray, `val`: Int): Int {
+    var i = 0
+    for (j in 1 until nums.size) {
+        if (nums[j] != val) {
+            i++
+            nums[i] = nums[j]
+        }
+    }
+    return i
+}
