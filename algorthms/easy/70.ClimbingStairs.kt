@@ -12,3 +12,14 @@ fun climbStairs(step: Int, n: Int, memo: IntArray): Int {
     memo[step] = climbStairs(step + 1, n, memo) + climbStairs(step + 2, n, memo)
     return memo[step]
 }
+
+fun climbStairsDP(n: Int): Int {
+    if (n == 1) return 1
+
+    val dp = IntArray(n + 1)
+    for (i in 3..n) {
+        dp[i] = dp[i - 1] + dp[i - 2]
+    }
+
+    return dp[n]
+}
